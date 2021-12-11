@@ -34,22 +34,31 @@
       </style>
     
     <script type="text/babel">
-        const rootElement = document.getElementById('root')
-        const Box = ({className='', style, size, ...rest}) => {
-            const sizeClassName = size ? `box--${size}` : ''
-            return (
-                <div className={`box ${sizeClassName}`} {...rest} style={{fontStyle: 'italic', ...style}}/>
-            )
+
+      function UsernameForm() {
+        const usernameInputRef = React.useRef()
+        const handleSubmit = (e) => {
+          e.preventDefault()
+          console.dir(e.target)
+          console.log(e.target.elements.usernameInput.value)
+          const username = usernameInputRef.current.value
+          console.log(username);
         }
-        const element = (
-            <div>
-                <Box size='small' style={{backgroundColor: 'lightblue'}}>small box</Box>
-                <Box size='medium' style={{backgroundColor: 'pink'}} >medium box</Box>
-                <Box size='large' style={{backgroundColor: 'orange'}}>large box</Box>
+        return (
+        <div>
+                <form action="" onSubmit={handleSubmit}>
+                  <div>
+                    <label htmlFor="usernameInput">Username:</label>
+                    <input ref={usernameInputRef} type="text" id='usernameInput' />
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
             </div>
         )
+
+      }
         
-        ReactDOM.render(element, rootElement)
+        ReactDOM.render(<UsernameForm />, document.getElementById('root'))
     </script>
 </body>
 </html>
